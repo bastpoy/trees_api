@@ -1,0 +1,46 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/contribution.css" />
+    <link rel="stylesheet" href="../css/button.css" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script type="module" src="../js/contribution.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="img_background">
+      <h2>Contribuer à ajouter de nouveaux arbres dans Lyon</h2>
+      <br />
+      <div class="explication">
+        Cette page te permet de contribuer à donner la position des arbres dans
+        la ville de Lyon. <br />
+        Pour cela il faut cliquer sur le bouton en dessous lorsque tu es sous un
+        arbre. <br />
+        Le bouton va sauvergarder ta géolocalisation actuelle et ajouter un
+        nouveau point sur la carte de Lyon <br />
+      </div>
+      <br />
+      <div class="contribution_div">
+        <button id="button" type="button" class="contribution_button button-3">
+          Cliques ici pour donner la position d'un arbre
+        </button>
+      </div>
+      <div class="nav_buttons">
+        <button
+          id="button"
+          type="button"
+          class="nav_button map_button button-3"
+        >
+          Aller vers la map
+        </button>
+        <button class="nav_button user_button button-3">Mon Compte</button>
+      </div>
+    </div>
+  </body>
+</html>

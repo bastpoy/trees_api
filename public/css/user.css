@@ -1,0 +1,41 @@
+* {
+  font-family: Arial, sans-serif;
+  margin: 0px;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgba(184, 233, 148, 1);
+}
+h2 {
+  text-align: center;
+}
+.infos_personnelles {
+  text-align: center;
+}
+.mypoints {
+  text-align: center;
+}
+.otherPoints {
+  text-align: center;
+}
+.nav_buttons {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 20px;
+}
+.latitude_longitude {
+  position: relative;
+}
+.close-button {
+  color: #ea2027;
+  right: 1rem;
+  top: 0;
+  font-size: 1em;
+  line-height: 1;
+  cursor: pointer;
+  position: absolute;
+}
+.logout_button {
+  text-align: center;
+  padding-top: 20px;
+}

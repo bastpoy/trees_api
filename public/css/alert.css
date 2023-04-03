@@ -1,0 +1,19 @@
+/* tout ce qui est lié à la fonction alert */
+.alert {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 9999;
+  color: red;
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-align: center;
+}
+.alert--success {
+  background-color: #20bf6b;
+}
+.alert--error {
+  background-color: #eb4d4b;
+}

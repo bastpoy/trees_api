@@ -1,0 +1,72 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/alert.css" />
+    <link rel="stylesheet" href="../css/signup.css" />
+    <script async type="module" src="../js/signup.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="signup">
+      <div class="entete">
+        <div>Arbres in Lyon</div>
+        <h3>Bastien Poyet</h3>
+      </div>
+      <form class="signup_form">
+        <div class="bienvenue">Bienvenue</div>
+        <div class="element_form div_username">
+          <img src="../images/user.png" />
+          <label for="input_username"> </label>
+          <input
+            type="texte"
+            class="input_username"
+            name="input_username"
+            placeholder="nom d'utilisateur"
+            required
+          />
+        </div>
+        <div class="element_form div_email">
+          <img src="../images/mail.png" />
+          <label for="input_email"> </label>
+          <input
+            type="email"
+            class="input_email"
+            name="input_email"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="element_form div_password">
+          <img src="../images/password.png" />
+          <label for="input_password"> </label>
+          <input
+            type="password"
+            minlength="8"
+            class="input_password"
+            name="input_password"
+            placeholder="Mot de passe"
+            required
+          />
+        </div>
+        <div class="element_form div_passwordConfirm">
+          <img src="../images/password.png" />
+          <label for="input_confirmPassword"> </label>
+          <input
+            type="password"
+            minlength="8"
+            class="input_confirmPassword"
+            name="input_confirmPassword"
+            placeholder="Confirmation mot de passe"
+            required
+          />
+        </div>
+        <input type="submit" value="S'inscrire" class="signup_button" />
+      </form>
+      <div class="footer">
+        <button>Revenir à la page de connexion</button>
+      </div>
+    </div>
+  </body>
+</html>

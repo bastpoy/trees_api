@@ -1,0 +1,27 @@
+* {
+  font-family: Arial, sans-serif;
+  margin: 0px;
+  box-sizing: border-box;
+}
+h2 {
+  text-align: center;
+  border-bottom: solid 2px;
+}
+.img_background {
+  background-image: url(../images/contribution.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+}
+.nav_buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+.explication {
+  text-align: center;
+}
+.contribution_div {
+  text-align: center;
+  padding-bottom: 10px;
+}

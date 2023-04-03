@@ -1,0 +1,44 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/mapbox.css" />
+    <link rel="stylesheet" href="../css/button.css" />
+    <script
+      type="text/javascript"
+      src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"
+    ></script>
+    <script type="module" src="../js/map.js"></script>
+    <title>Map</title>
+  </head>
+  <body>
+    <div id="map">
+      <script
+        async
+        type="module"
+        src="../js/featuresfunction/mapbox.js"
+      ></script>
+      <div class="buttons">
+        <label class="switch">
+          <input type="checkbox" class="checkbox" />
+          <span class="slider round"></span>
+        </label>
+        <div>
+          <button type="button" class="nav_button user_button button-3">
+            Mon compte
+          </button>
+        </div>
+        <div>
+          <button class="nav_button contribution_button button-3">
+            Contribuer
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
