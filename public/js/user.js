@@ -5,7 +5,6 @@ const button = document.querySelectorAll(".close-button");
 
 document.addEventListener("click", (ev) => {
   ev.preventDefault();
-  // console.log(ev.target.className);
   if (ev.target.className === "nav_button map_button") {
     window.setTimeout(() => {
       location.assign("/map");

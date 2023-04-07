@@ -22,6 +22,7 @@ h2 {
   display: flex;
   justify-content: space-evenly;
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 .latitude_longitude {
   position: relative;

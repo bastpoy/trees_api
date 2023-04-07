@@ -1,7 +1,7 @@
 const { promisify } = require("util");
 const User = require("../model/userModel");
 const jwt = require("jsonwebtoken");
-const { response } = require("express");
+let expiredToken;
 
 const signToken = (id) => {
   //ici on crée un token que l'on va attribuer a chaque fois que l'utilsiateur
@@ -31,7 +31,6 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 exports.signup = async (req, res, next) => {
-  console.log(req.body);
   try {
     //si les deux mots de passes ne sont pas egaux je renvoies une erreur
     if (req.body.password != req.body.passwordConfirm) {
@@ -57,7 +56,6 @@ exports.signup = async (req, res, next) => {
 
     createSendToken(newUser, 201, res);
   } catch (err) {
-    console.log(err);
     return res.status(400).json({
       message: "failed to create user",
     });
@@ -65,11 +63,9 @@ exports.signup = async (req, res, next) => {
 };
 exports.login = async (req, res, next) => {
   try {
-    console.log("dans function login" + req.body);
     const { email, password } = req.body;
     //1) check if email and password actually exist
     if (!email || !password) {
-      console.log("error with email or password");
       //j'utilise return parce que sinon il me met une erreur comme quoi je ne peux pas
       return res.status(400).json({
         message: "provide password and email",
@@ -104,31 +100,46 @@ exports.logout = async (req, res) => {
   res.status(200).json({ status: "success" });
 };
 exports.protect = async (req, res, next) => {
-  let token;
   // récupérer le token et regarder si il est présent
   //le token est présent dans le header dans le champ authorization
   // il est stocké après le bearer
+  console.log("avant les if");
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
+    console.log("dans le bearer");
     token = req.headers.authorization.split(" ")[1];
   } else if (req.cookies.jwt) {
+    // avant d'affecter le token à ma variable token je vérifie si la durée du token n'a pas expiré
+    if (expiredToken < Date.now() / 1000) {
+      res.cookie("jwt", "loggedout", {
+        expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: true,
+      });
+      expiredToken = null;
+      return res.status(401).redirect("/");
+    }
     token = req.cookies.jwt;
   }
   if (!token) {
-    return res.status(401).redirect("/login").json({
-      status: "error",
-      message: "you are not logged in, please log in to get acces",
-    });
+    return res
+      .status(401)
+      .json({
+        status: "error",
+        message: "you are not logged in, please log in to get acces",
+      })
+      .redirect("/");
   }
+  //je stocke le temps d'expiration dans une variable globale pour savoir par la suite si mon token a expiré
+  expiredToken = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET).exp;
+
   //Vérifier le token
   //le verify provient de la bibliothèque jwt qui regarde si notre token est valide
   //ici on compare le token actuelle avec notre secret string qui "ecnrypte" le token
   // promisify permet de rendre le callback function de jwt.verify asynchrone pour ensuite utiliser async await
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   //decoded nous retourne l'id de compass de la personne qui avait le token
-  console.log(decoded);
   //vérifier si l'utilisateur existe toujours
   const freshUser = await User.findById(decoded.id);
   if (!freshUser) {
@@ -137,7 +148,7 @@ exports.protect = async (req, res, next) => {
       message: "the user belonging to the user no longer exist",
     });
   }
-  //regarder si l'utilsiateur a changé son mdp après que le token soit donnée
+  //regarder si l'utilisateur a changé son mdp après que le token soit donnée
   if (freshUser.changedPasswordAfter(decoded.iat)) {
     res.status(401).json({
       status: "error",

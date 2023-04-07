@@ -40,7 +40,6 @@ export async function tracePoint(datas) {
     },
   }));
   //remove all the layer if it exists
-  // console.log(`${numberOfLayer--}${numberOfLayer--}`);
   if (map.getLayer(`${numberOfLayer - 1}`)) {
     map.removeLayer(`${numberOfLayer - 1}`);
   }
