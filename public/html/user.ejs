@@ -14,6 +14,7 @@
       <button id="button-3" class="nav_button contribution_button">
         Contribuer
       </button>
+      <button id="button-3" type="button" class="logout">Déconnexion</button>
     </div>
     <div class="infos_personnelles">
       <h2>Infos Personnelles</h2>
@@ -22,37 +23,27 @@
       Role:<%=myUser.role%>
       <br />
     </div>
-    <div class="mypoints">
-      <% if(myPosition.length!=0){ %>
-      <h2>Tes points GPS</h2>
-      <%let i=1; myPosition.forEach(function(position) { %>
-      <h3>Point <%= i %></h3>
-      <div class="latitude_longitude" id="<%= position._id %>">
-        Latitude: <%= position.latitude %>,<br />
-        Longitude: <%= position.longitude %> <br />
-        Date:<%= position.createdAt %>
-        <div class="callout">
-          <button
-            class="close-button"
-            aria-label="Case de fermeture"
-            type="button"
-          >
-            &times;
-          </button>
-        </div>
-      </div>
-      <%i++ })};%>
-      <br />
+    <div class="numberOfPoints">
+      <% if(myPosition.length==0){ %>
+      <h2>Vous n'avez pas encore soumis de points.</h2>
+      <% }else{ %>
+      <h2>Vous avez soumis <%= myPosition.length %> points</h2>
+      <h2>
+        Il y a actuellement <%=myPosition.length+ otherPosition.length %>
+        positions d'arbres indiquées
+      </h2>
+      <% } %>
     </div>
     <div class="otherPoints">
-      <% if(otherPosition!=undefined){%> <% if(otherPosition.length!=0){%>
+      <% if(otherPosition!=undefined&&myUser.role==="admin"){%> <%
+      if(otherPosition.length!=0){%>
       <h2>Les autres points GPS</h2>
       <%let i=1; otherPosition.forEach(function(position) { %>
       <h3>Point <%= i %></h3>
       <div class="latitude_longitude" id="<%= position._id %>">
-        Latitude: <%= position.latitude %>,<br />
-        Longitude: <%= position.longitude %> <br />
-        Date:<%= position.createdAt %>
+        <b>Latitude</b>: <%= position.latitude %>,<br />
+        <b>Longitude</b>: <%= position.longitude %> <br />
+        <b>Date</b>:<%= position.createdAt %>
         <div class="callout">
           <button
             class="close-button"
@@ -66,15 +57,27 @@
       <%i++ })}};%>
       <br />
     </div>
-    <div class="numberOfPoints">
-      <% if(myPosition.length==0){ %>
-      <h2>Vous n'avez pas encore soumis de points.</h2>
-      <% }else{ %>
-      <h2>Vous avez soumis <%= myPosition.length %> points</h2>
-      <% } %>
-    </div>
-    <div class="logout_button">
-      <button id="button-3" type="button" class="logout">Déconnexion</button>
+    <div class="mypoints">
+      <% if(myPosition.length!=0){ %>
+      <h2>Tes points GPS</h2>
+      <%let i=1; myPosition.forEach(function(position) { %>
+      <h3>Point <%= i %></h3>
+      <div class="latitude_longitude" id="<%= position._id %>">
+        <b>Latitude</b>: <%= position.latitude %>,<br />
+        <b>Longitude</b>: <%= position.longitude %> <br />
+        <b>Date</b>:<%= position.createdAt %>
+        <div class="callout">
+          <button
+            class="close-button"
+            aria-label="Case de fermeture"
+            type="button"
+          >
+            &times;
+          </button>
+        </div>
+      </div>
+      <%i++ })};%>
+      <br />
     </div>
   </body>
 </html>

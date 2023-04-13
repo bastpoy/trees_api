@@ -8,7 +8,6 @@ export const dataForm = function (form) {
       email: form.elements["input_email"].value,
       password: form.elements["input_password"].value,
     };
-    console.log(data);
     fetchLoginData(data);
   });
 };

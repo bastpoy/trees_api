@@ -12,6 +12,9 @@ h2 {
 .infos_personnelles {
   text-align: center;
 }
+.numberOfPoints {
+  padding-bottom: 20px;
+}
 .mypoints {
   text-align: center;
 }
@@ -35,8 +38,4 @@ h2 {
   line-height: 1;
   cursor: pointer;
   position: absolute;
-}
-.logout_button {
-  text-align: center;
-  padding-top: 20px;
 }

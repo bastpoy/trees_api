@@ -84,7 +84,6 @@ export const fetchNewPosition = async function (dataArray) {
       throw new Error(err.error);
     }
     if (response.ok) {
-      console.log(response);
       showAlert("success", "Position successfully add");
     }
   } catch (err) {

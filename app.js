@@ -63,6 +63,11 @@ app.use((req, res, next) => {
   console.log(req.cookies);
   next();
 });
+app.use(function (req, res, next) {
+  var ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  console.log("IP address:", ip);
+  next();
+});
 
 //routes liées à l'authentification et à l'utilisateur
 app.get("/", viewsController.loginPage);

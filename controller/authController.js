@@ -111,14 +111,16 @@ exports.protect = async (req, res, next) => {
     console.log("dans le bearer");
     token = req.headers.authorization.split(" ")[1];
   } else if (req.cookies.jwt) {
+    console.log("avant de rentrer dans la fonction token expiré");
     // avant d'affecter le token à ma variable token je vérifie si la durée du token n'a pas expiré
     if (expiredToken < Date.now() / 1000) {
-      res.cookie("jwt", "loggedout", {
-        expires: new Date(Date.now() + 10 * 1000),
-        httpOnly: true,
-      });
-      expiredToken = null;
-      return res.status(401).redirect("/");
+      console.log("durée token expirée");
+      // res.cookie("jwt", "loggedout", {
+      //   expires: new Date(Date.now() + 10 * 1000),
+      //   httpOnly: true,
+      // });
+      expiredToken = undefined;
+      return res.redirect(301, "/");
     }
     token = req.cookies.jwt;
   }

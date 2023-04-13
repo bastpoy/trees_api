@@ -11,12 +11,10 @@ exports.userPage = async (req, res, next) => {
     //je récupère mon User aussi
     const myUser = await User.findById(req.user._id).select("-_id -__v");
     //si je suis admin je recoie toutes les autres positions
-    let otherPosition;
-    if (req.user.role === "admin") {
-      otherPosition = await Position.find({
-        user: { $not: { $eq: req.user._id } },
-      }).select("-user -__v");
-    }
+    const otherPosition = await Position.find({
+      user: { $not: { $eq: req.user._id } },
+    }).select("-user -__v");
+
     //je render mon ejs avec les paramètres de position et aussi d'user
     res.status(200).render("user", {
       myPosition: myPosition,

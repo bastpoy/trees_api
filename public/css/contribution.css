@@ -11,11 +11,16 @@ h2 {
   background-image: url(../images/contribution.jpg);
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
   height: 100%;
   width: 100%;
 }
 .nav_buttons {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 .explication {
@@ -24,4 +29,8 @@ h2 {
 .contribution_div {
   text-align: center;
   padding-bottom: 10px;
+  flex-wrap: wrap;
+}
+#button-3 {
+  padding-bottom: 20px;
 }
