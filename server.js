@@ -20,9 +20,9 @@ mongoose // ici je me connecte a ma base de donnée en utilisant l'url stockée 
   });
 
 // lancement du serveur express
-// app.listen(port, () => {
-//   console.log(`app running on port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`app running on port ${port}`);
+});
 
 // const sslServer = https.createServer(
 //   {
@@ -32,6 +32,6 @@ mongoose // ici je me connecte a ma base de donnée en utilisant l'url stockée 
 //   app
 // );
 
-sslServer.listen(port, () => {
-  console.log(`app running on port ${port}`);
-});
+// sslServer.listen(port, () => {
+//   console.log(`app running on port ${port}`);
+// });
