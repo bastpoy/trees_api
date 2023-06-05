@@ -3,7 +3,7 @@ import { showAlert } from "./alerts.js";
 //je récupère tous mes points de ma base de donnée
 export const allPositions = async function () {
   try {
-    const response = await fetch("http://127.0.0.1:3000/positions", {
+    const response = await fetch("http://127.0.0.1:8000/positions", {
       method: "GET",
     });
     if (!response.ok) {
@@ -22,7 +22,7 @@ export const allPositions = async function () {
 
 export const myPositions = async function () {
   try {
-    const response = await fetch("http://127.0.0.1:3000/myPositions", {
+    const response = await fetch("http://127.0.0.1:8000/myPositions", {
       method: "GET",
     });
     if (!response.ok) {
@@ -40,7 +40,7 @@ export const myPositions = async function () {
 };
 export const deletePosition = async function (id) {
   try {
-    const response = await fetch(`http://127.0.0.1:3000/position/${id}`, {
+    const response = await fetch(`http://127.0.0.1:8000/position/${id}`, {
       method: "delete",
     });
     if (!response.ok) {

@@ -3,7 +3,7 @@ import { showAlert } from "./alerts.js";
 //elle est liée au formulaire
 export const fetchLoginData = async function (dataArray) {
   try {
-    const response = await fetch("http://127.0.0.1:3000/login", {
+    const response = await fetch("http://127.0.0.1:8000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const fetchLoginData = async function (dataArray) {
 };
 export const postSignup = async function (data) {
   try {
-    const response = await fetch("http://127.0.0.1:3000/signup", {
+    const response = await fetch("http://127.0.0.1:8000/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const postSignup = async function (data) {
 };
 export const logout = async function () {
   try {
-    const response = await fetch("http://127.0.0.1:3000/logout", {
+    const response = await fetch("http://127.0.0.1:8000/logout", {
       method: "get",
     });
     if (!response.ok) {
@@ -71,7 +71,7 @@ export const logout = async function () {
 // à ma base de donnée liée à mon utilisateur
 export const fetchNewPosition = async function (dataArray) {
   try {
-    const response = await fetch("http://127.0.0.1:3000/positions", {
+    const response = await fetch("http://127.0.0.1:8000/positions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

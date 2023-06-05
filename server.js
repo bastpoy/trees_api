@@ -23,15 +23,3 @@ mongoose // ici je me connecte a ma base de donnée en utilisant l'url stockée 
 app.listen(port, () => {
   console.log(`app running on port ${port}`);
 });
-
-// const sslServer = https.createServer(
-//   {
-//     key: fs.readFileSync(path.join(__dirname, "cert", "key.pem")),
-//     cert: fs.readFileSync(path.join(__dirname, "cert", "cert.pem")),
-//   },
-//   app
-// );
-
-// sslServer.listen(port, () => {
-//   console.log(`app running on port ${port}`);
-// });
