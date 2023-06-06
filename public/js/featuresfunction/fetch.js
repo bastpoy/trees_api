@@ -26,7 +26,7 @@ export const fetchLoginData = async function (dataArray) {
 };
 export const postSignup = async function (data) {
   try {
-    const response = await fetch("http://127.0.0.1:8000/signup", {
+    const response = await fetch("/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const postSignup = async function (data) {
 };
 export const logout = async function () {
   try {
-    const response = await fetch("http://127.0.0.1:8000/logout", {
+    const response = await fetch("/logout", {
       method: "get",
     });
     if (!response.ok) {
@@ -71,7 +71,7 @@ export const logout = async function () {
 // à ma base de donnée liée à mon utilisateur
 export const fetchNewPosition = async function (dataArray) {
   try {
-    const response = await fetch("http://127.0.0.1:8000/positions", {
+    const response = await fetch("/positions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
