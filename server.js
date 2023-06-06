@@ -2,11 +2,9 @@ const app = require("./app");
 const DB = "mongodb+srv://bastpoy:bastien69@cluster0.5ryw1sc.mongodb.net/test";
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const fs = require("fs");
-const path = require("path");
-const https = require("https");
 
 dotenv.config({ path: "./config.env" });
+
 const port = process.env.PORT;
 mongoose.set("strictQuery", false);
 

@@ -1,6 +1,13 @@
 const Position = require("../model/positionModel");
 const User = require("../model/userModel");
-
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
+const environment = process.env.NODE_ENV || "development";
+const apiUrl =
+  environment === "production"
+    ? process.env.PRODUCTION_API_URL
+    : process.env.DEVELOPMENT_API_URL;
+console.log(apiUrl);
 exports.userPage = async (req, res, next) => {
   // il faut que je récupère l'id de mon utilisateur actuelle qui est connecté comme ca je peux avoir accès aux points
   //et je garde seulement les latitudes et longitudes
@@ -30,7 +37,7 @@ exports.userPage = async (req, res, next) => {
 };
 exports.loginPage = (req, res, next) => {
   try {
-    res.render("login");
+    res.render("login", { apiUrl: apiUrl });
   } catch (err) {
     console.log(err);
   }

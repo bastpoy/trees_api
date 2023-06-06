@@ -3,7 +3,7 @@ import { showAlert } from "./alerts.js";
 //elle est liée au formulaire
 export const fetchLoginData = async function (dataArray) {
   try {
-    const response = await fetch("http://127.0.0.1:8000/login", {
+    const response = await fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
