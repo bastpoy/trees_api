@@ -103,7 +103,6 @@ exports.protect = async (req, res, next) => {
   // récupérer le token et regarder si il est présent
   //le token est présent dans le header dans le champ authorization
   // il est stocké après le bearer
-  console.log("avant les if");
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -111,7 +110,6 @@ exports.protect = async (req, res, next) => {
     console.log("dans le bearer");
     token = req.headers.authorization.split(" ")[1];
   } else if (req.cookies.jwt) {
-    console.log("avant de rentrer dans la fonction token expiré");
     // avant d'affecter le token à ma variable token je vérifie si la durée du token n'a pas expiré
     if (expiredToken < Date.now() / 1000) {
       console.log("durée token expirée");
@@ -124,6 +122,7 @@ exports.protect = async (req, res, next) => {
     }
     token = req.cookies.jwt;
   }
+
   if (!token) {
     return res
       .status(401)

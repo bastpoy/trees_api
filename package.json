@@ -4,9 +4,7 @@
   "description": "je repère la position des arbes a Lyon",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:prod": "NODE_ENV=production nodemon server.js",
-    "start:dev": "NODE_ENV=develpment nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "bastpoy",
   "license": "ISC",

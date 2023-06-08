@@ -18,7 +18,7 @@ export const fetchLoginData = async function (dataArray) {
       showAlert("success", "Logged in successfully!");
       window.setTimeout(() => {
         location.assign("/user");
-      }, 1500);
+      }, 1000);
     }
   } catch (err) {
     showAlert("error", err);
