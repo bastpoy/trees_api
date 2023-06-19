@@ -15,7 +15,7 @@ export const fetchLoginData = async function (dataArray) {
       throw new Error(err.error);
     }
     if (response.ok) {
-      showAlert("success", "Logged in successfully!");
+      showAlert("success", "connecté avec succès!");
       window.setTimeout(() => {
         location.assign("/user");
       }, 1000);
@@ -76,7 +76,11 @@ export const fetchNewPosition = async function (dataArray) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ latitude: dataArray[0], longitude: dataArray[1] }),
+      body: JSON.stringify({
+        latitude: dataArray[0],
+        longitude: dataArray[1],
+        type: dataArray[2],
+      }),
     });
 
     if (!response.ok) {
@@ -84,7 +88,7 @@ export const fetchNewPosition = async function (dataArray) {
       throw new Error(err.error);
     }
     if (response.ok) {
-      showAlert("success", "Position successfully add");
+      showAlert("success", "Position d'arbre ajoutée 🌳🌳");
     }
   } catch (err) {
     showAlert("error", err);

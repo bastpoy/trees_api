@@ -23,6 +23,7 @@ exports.createPosition = async (req, res, next) => {
     const newPosition = await Position.create({
       latitude: req.body.latitude,
       longitude: req.body.longitude,
+      type: req.body.type,
       user: req.user._id,
     });
     res.status(201).json({

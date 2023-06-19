@@ -12,7 +12,6 @@ dotenv.config({ path: "./config.env" });
 exports.userPage = async (req, res, next) => {
   // il faut que je récupère l'id de mon utilisateur actuelle qui est connecté comme ca je peux avoir accès aux points
   //et je garde seulement les latitudes et longitudes
-  console.log("dans la page user");
   try {
     const myPosition = await Position.find({ user: req.user._id }).select(
       "-user -__v"

@@ -14,9 +14,16 @@ document.addEventListener("click", (ev) => {
   }
   if (ev.target.className === "contribution_button") {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        fetchNewPosition([position.coords.latitude, position.coords.longitude]);
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          fetchNewPosition([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
+        },
+        console.log("error getting your position"),
+        { maximumAge: 0, timeout: 100000, enableHighAccuracy: true }
+      );
     }
   }
 });

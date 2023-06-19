@@ -17,3 +17,16 @@
 .alert--error {
   background-color: #eb4d4b;
 }
+.tree_type {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 9999;
+  color: #2ea44f;
+  background-color: #fbc531;
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-align: center;
+}

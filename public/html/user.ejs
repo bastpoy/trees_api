@@ -1,6 +1,7 @@
 <html lang="en">
   <head>
-    <title>Document</title>
+    <title><%=myUser.name%></title>
+    <link rel="shortcut icon" href="../images/logo.jpg" type="image/x-icon" />
     <link rel="stylesheet" href="../css/user.css" />
     <link rel="stylesheet" href="../css/alert.css" />
     <link rel="stylesheet" href="../css/button.css" />
@@ -43,6 +44,7 @@
       <div class="latitude_longitude" id="<%= position._id %>">
         <b>Latitude</b>: <%= position.latitude %>,<br />
         <b>Longitude</b>: <%= position.longitude %> <br />
+        <b>Type</b>: <%= position.type %> <br />
         <b>Date</b>:<%= position.createdAt %>
         <div class="callout">
           <button
@@ -65,6 +67,7 @@
       <div class="latitude_longitude" id="<%= position._id %>">
         <b>Latitude</b>: <%= position.latitude %>,<br />
         <b>Longitude</b>: <%= position.longitude %> <br />
+        <b>Type</b>: <%= position.type %> <br />
         <b>Date</b>:<%= position.createdAt %>
         <div class="callout">
           <button

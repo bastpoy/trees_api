@@ -25,6 +25,7 @@ map.addControl(
 //j'affiche toutes les positions par defaut
 let numberOfLayer = 0;
 const returnPos = await allPositions();
+console.log(returnPos);
 tracePoint(returnPos);
 
 export async function tracePoint(datas) {

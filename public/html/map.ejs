@@ -1,5 +1,6 @@
 <html lang="en">
   <head>
+    <title>Map</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,8 +8,10 @@
       href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
       rel="stylesheet"
     />
+    <link rel="shortcut icon" href="../images/logo.jpg" type="image/x-icon" />
     <link rel="stylesheet" href="../css/mapbox.css" />
     <link rel="stylesheet" href="../css/button.css" />
+    <link rel="stylesheet" href="../css/alert.css" />
     <script
       type="text/javascript"
       src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"
@@ -17,6 +20,19 @@
     <title>Map</title>
   </head>
   <body>
+    <div class="tree_type">
+      Choisis ton type d'arbre
+      <ul>
+        <input type="button" class="platane_type" value="platane" />
+        <input type="button" class="erable_type" value="erable" />
+        <input type="button" class="tilleul_type" value="tilleul" />
+        <input type="button" class="cerisier_type" value="cerisier" />
+        <input type="button" class="micocouliers_type" value="micocouliers" />
+        <input type="button" class="frene_type" value="frene" />
+        <input type="button" class="chene_type" value="chene" />
+        <input type="button" class="other_type" value="autre" />
+      </ul>
+    </div>
     <div id="map">
       <script
         async
@@ -37,6 +53,9 @@
           <button id="button-3" class="nav_button contribution_button">
             Contribuer
           </button>
+        </div>
+        <div>
+          <button id="button-3" class="nav_button tree_position">🌳🌳</button>
         </div>
       </div>
     </div>

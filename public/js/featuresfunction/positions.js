@@ -1,4 +1,5 @@
 import { showAlert } from "./alerts.js";
+import { fetchNewPosition } from "./fetch.js";
 
 //je récupère tous mes points de ma base de donnée
 export const allPositions = async function () {
@@ -53,5 +54,23 @@ export const deletePosition = async function (id) {
     }
   } catch (err) {
     showAlert("error", err);
+  }
+};
+export const addPosition = async function (treeType) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        fetchNewPosition([
+          position.coords.latitude,
+          position.coords.longitude,
+          treeType,
+        ]);
+      },
+      (error) => {
+        showAlert("error", "Error lors de l'ajout de l'arbre 🌳🌳");
+        console.error("Error getting position:", error);
+      },
+      { maximumAge: 0, timeout: 100000, enableHighAccuracy: true }
+    );
   }
 };

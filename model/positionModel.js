@@ -2,6 +2,19 @@ const mongoose = require("mongoose");
 const validate = require("validator");
 
 const positionSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: [
+      "platane",
+      "erables",
+      "tilleuls",
+      "cerisier",
+      "micocoulier",
+      "frene",
+      "chene",
+    ],
+    // required: [true, "A position must have a type"],
+  },
   latitude: {
     type: String,
     required: [true, "A position must have a latitude"],
