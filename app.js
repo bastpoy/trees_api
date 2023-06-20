@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //fonction permettant de limiter le nombre de requêtes sur notre api. on le voit dans le header de la réponsé lenombre de requêtes qu'il reste
 const limiter = rateLimit({
   //je convertis mes ms en heure et je veux max 100 request en une heure
-  max: 50,
+  max: 5000,
   windowMs: 60 * 60 * 1000,
   message: "Too many requests  from this IP, please try again in an hour!",
 });
