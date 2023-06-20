@@ -19,7 +19,6 @@ document.addEventListener("click", (ev) => {
     logout();
   }
 });
-console.log(button);
 button.forEach((el) =>
   el.addEventListener("click", (ev) => {
     ev.preventDefault();

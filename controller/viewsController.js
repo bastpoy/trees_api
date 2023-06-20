@@ -44,7 +44,6 @@ exports.loginPage = (req, res, next) => {
   }
 };
 exports.mapPage = async (req, res, next) => {
-  console.log("dans la page mappage");
   try {
     res.status(200).render("map");
   } catch (err) {

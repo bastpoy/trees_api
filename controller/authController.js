@@ -103,62 +103,62 @@ exports.protect = async (req, res, next) => {
   // récupérer le token et regarder si il est présent
   //le token est présent dans le header dans le champ authorization
   // il est stocké après le bearer
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    console.log("dans le bearer");
-    token = req.headers.authorization.split(" ")[1];
-  } else if (req.cookies.jwt) {
-    // avant d'affecter le token à ma variable token je vérifie si la durée du token n'a pas expiré
-    if (expiredToken < Date.now() / 1000) {
-      console.log("durée token expirée");
-      // res.cookie("jwt", "loggedout", {
-      //   expires: new Date(Date.now() + 10 * 1000),
-      //   httpOnly: true,
-      // });
-      expiredToken = undefined;
-      return res.redirect(301, "/");
+  try {
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer")
+    ) {
+      console.log("dans le bearer");
+      token = req.headers.authorization.split(" ")[1];
+    } else if (req.cookies.jwt) {
+      // avant d'affecter le token à ma variable token je vérifie si la durée du token n'a pas expiré
+      if (expiredToken < Date.now() / 1000) {
+        console.log("durée token expirée");
+        expiredToken = undefined;
+        return res.redirect(301, "/");
+      }
+      token = req.cookies.jwt;
     }
-    token = req.cookies.jwt;
-  }
 
-  if (!token) {
-    return res
-      .status(401)
-      .json({
+    if (!token) {
+      return res
+        .status(401)
+        .json({
+          status: "error",
+          message: "you are not logged in, please log in to get acces",
+        })
+        .redirect("/");
+    }
+    //je stocke le temps d'expiration dans une variable globale pour savoir par la suite si mon token a expiré
+    expiredToken = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET).exp;
+
+    //Vérifier le token
+    //le verify provient de la bibliothèque jwt qui regarde si notre token est valide
+    //ici on compare le token actuelle avec notre secret string qui "ecnrypte" le token
+    // promisify permet de rendre le callback function de jwt.verify asynchrone pour ensuite utiliser async await
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    //decoded nous retourne l'id de compass de la personne qui avait le token
+    //vérifier si l'utilisateur existe toujours
+    const freshUser = await User.findById(decoded.id);
+    if (!freshUser) {
+      return res.status(401).json({
         status: "error",
-        message: "you are not logged in, please log in to get acces",
-      })
-      .redirect("/");
+        message: "the user belonging to the user no longer exist",
+      });
+    }
+    //regarder si l'utilisateur a changé son mdp après que le token soit donnée
+    if (freshUser.changedPasswordAfter(decoded.iat)) {
+      res.status(401).json({
+        status: "error",
+        message: "user recently change password log in again",
+      });
+    }
+    req.user = freshUser;
+    //GRANT ACCESS TO PROTECTED ROUTE
+    next();
+  } catch (err) {
+    res.redirect(308, "/");
   }
-  //je stocke le temps d'expiration dans une variable globale pour savoir par la suite si mon token a expiré
-  expiredToken = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET).exp;
-
-  //Vérifier le token
-  //le verify provient de la bibliothèque jwt qui regarde si notre token est valide
-  //ici on compare le token actuelle avec notre secret string qui "ecnrypte" le token
-  // promisify permet de rendre le callback function de jwt.verify asynchrone pour ensuite utiliser async await
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  //decoded nous retourne l'id de compass de la personne qui avait le token
-  //vérifier si l'utilisateur existe toujours
-  const freshUser = await User.findById(decoded.id);
-  if (!freshUser) {
-    return res.status(401).json({
-      status: "error",
-      message: "the user belonging to the user no longer exist",
-    });
-  }
-  //regarder si l'utilisateur a changé son mdp après que le token soit donnée
-  if (freshUser.changedPasswordAfter(decoded.iat)) {
-    res.status(401).json({
-      status: "error",
-      message: "user recently change password log in again",
-    });
-  }
-  req.user = freshUser;
-  //GRANT ACCESS TO PROTECTED ROUTE
-  next();
 };
 exports.restrictTo = (...roles) => {
   //je crée un tableau en utilisant ...roles

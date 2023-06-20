@@ -81,7 +81,7 @@ app.get("/signupForm", viewsController.signupPage);
 app.get(
   "/positions",
   authController.protect,
-  authController.restrictTo("admin"),
+  //authController.restrictTo("admin"),
   positionController.getAllPositions
 );
 app.get(
