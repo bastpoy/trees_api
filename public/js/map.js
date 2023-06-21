@@ -41,6 +41,13 @@ document.addEventListener("click", (ev) => {
     treeDiv.style.display = "block";
     //j'envoie le type d'arbre auquel je clique
     treeDivInput.forEach(function (input) {
+      // je refresh la page je clique pas au bon endroit
+      document.addEventListener("click", function (event) {
+        if (!event.target.closest(".tree_type")) {
+          treeDiv.style.display = "none";
+          location.reload();
+        }
+      });
       input.addEventListener("click", function (event) {
         // j'enregistre la valeur du type d'arbre cliqué que j'ajoute ensuite
         const clickedValue = event.target.value;
@@ -49,11 +56,11 @@ document.addEventListener("click", (ev) => {
       });
     });
     // je refresh la page je clique pas au bon endroit
-    document.addEventListener("click", function (event) {
-      if (!event.target.closest(".tree_type")) {
-        treeDiv.style.display = "none";
-        location.reload();
-      }
-    });
+    // document.addEventListener("click", function (event) {
+    //   if (!event.target.closest(".tree_type")) {
+    //     treeDiv.style.display = "none";
+    //     location.reload();
+    //   }
+    // });
   }
 });
