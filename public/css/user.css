@@ -17,13 +17,13 @@ h2 {
 }
 .mypoints {
   text-align: center;
-  height: 100%;
-  overflow-y: scroll;
+  max-height: 100%;
+  overflow-y: auto;
 }
 .otherPoints {
   text-align: center;
-  height: 100%;
-  overflow-y: scroll;
+  max-height: 100%;
+  overflow-y: auto;
 }
 .nav_buttons {
   display: flex;

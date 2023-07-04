@@ -65,7 +65,7 @@ exports.contributionPage = (req, res, next) => {
 };
 exports.signupPage = async (req, res, next) => {
   //je renvois mon formulaire de signupPage
-  console.log("je rentre dans ma page signup");
+  console.log(" dans ma page signup");
   try {
     res.status(200).render("signup");
   } catch (err) {

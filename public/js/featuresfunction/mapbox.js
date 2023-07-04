@@ -65,3 +65,15 @@ export async function tracePoint(datas) {
   //cecei permet de raffraichir quand j'appuie sur mon cursor
   await map.setStyle(map.getStyle());
 }
+
+// map.on('load',()=>{
+//   map.addSource('treeType',{
+//     type:"vector"
+//   })
+//   map.addLayer({
+//     'id':"tree_type",
+//     'type':'circle',
+//     'source':'treeType'
+
+//   })
+// })
