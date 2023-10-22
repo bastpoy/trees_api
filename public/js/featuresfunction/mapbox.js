@@ -66,14 +66,13 @@ export async function tracePoint(datas) {
   await map.setStyle(map.getStyle());
 }
 
-// map.on('load',()=>{
-//   map.addSource('treeType',{
-//     type:"vector"
-//   })
-//   map.addLayer({
-//     'id':"tree_type",
-//     'type':'circle',
-//     'source':'treeType'
-
-//   })
-// })
+map.on("load", () => {
+  map.addSource("treeType", {
+    type: "vector",
+  });
+  map.addLayer({
+    id: "tree_type",
+    type: "circle",
+    source: "treeType",
+  });
+});
