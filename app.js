@@ -2,6 +2,7 @@ const express = require("express");
 const authController = require("./controller/authController.js");
 const positionController = require("./controller/positionController.js");
 const viewsController = require("./controller/viewsController.js");
+const email = require("./utils/email.js");
 const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -107,6 +108,6 @@ app.get(
   authController.protect,
   viewsController.contributionPage
 );
-
+app.get("/email",)
 //j'exporte mon app
 module.exports = app;
