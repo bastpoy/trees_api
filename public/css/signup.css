@@ -16,7 +16,7 @@ input:not(.signup_button) {
 }
 
 .signup {
-  background-image: url(../images/plant.png);
+  background-image: url(../images/plant.webp);
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -32,10 +32,8 @@ input:not(.signup_button) {
   margin: 30px 0px 30px 0px;
   border-radius: 20px;
   border: solid rgba(1, 163, 164, 1);
-  box-shadow: 5.8px 5.1px 2.2px rgba(0, 0, 0, 0.356),
-    10.5px 9.1px 10.2px rgba(0, 0, 0, 0.402),
-    14.3px 12.4px 29.8px rgba(0, 0, 0, 0.409),
-    30px 26px 93px rgba(0, 0, 0, 0.41);
+  box-shadow: 5.8px 5.1px 2.2px rgba(0, 0, 0, 0.356), 10.5px 9.1px 10.2px rgba(0, 0, 0, 0.402),
+    14.3px 12.4px 29.8px rgba(0, 0, 0, 0.409), 30px 26px 93px rgba(0, 0, 0, 0.41);
 }
 .entete {
   position: absolute;

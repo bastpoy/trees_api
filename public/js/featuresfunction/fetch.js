@@ -17,7 +17,8 @@ export const fetchLoginData = async function (dataArray) {
     if (response.ok) {
       showAlert("success", "connecté avec succès!");
       window.setTimeout(() => {
-        location.assign("/user");
+        console.log(dataArray.email);
+        location.assign(`/email:${dataArray.email}`);
       }, 1000);
     }
   } catch (err) {

@@ -14,7 +14,6 @@ export const allPositions = async function () {
     if (response.ok) {
       const data = await response.json();
       return data.data;
-      // showAlert("success", "Logged in successfully!");
     }
   } catch (err) {
     showAlert("error", err);
@@ -33,7 +32,23 @@ export const myPositions = async function () {
     if (response.ok) {
       const data = await response.json();
       return data.data;
-      // showAlert("success", "Logged in successfully!");
+    }
+  } catch (err) {
+    showAlert("error", err);
+  }
+};
+export const otherPositions = async function () {
+  try {
+    const response = await fetch("/otherPositions", {
+      method: "GET",
+    });
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.error);
+    }
+    if (response.ok) {
+      const data = await response.json();
+      return data.data;
     }
   } catch (err) {
     showAlert("error", err);

@@ -9,35 +9,38 @@
   </head>
   <body>
     <div class="nav_buttons">
-      <button id="button-3" type="button" class="nav_button map_button">
-        Aller vers la map
-      </button>
-      <button id="button-3" class="nav_button contribution_button">
-        Contribuer
-      </button>
+      <button id="button-3" type="button" class="nav_button map_button">Aller vers la map</button>
+      <button id="button-3" class="nav_button contribution_button">Contribuer</button>
       <button id="button-3" type="button" class="logout">Déconnexion</button>
     </div>
-    <div class="infos_personnelles">
-      <h2>Infos Personnelles</h2>
-      Nom: <%=myUser.name%> <br />
-      Email: <%=myUser.email%> <br />
-      Role:<%=myUser.role%>
-      <br />
+    <div class="info_rank">
+      <div class="infos_personnelles">
+        <h2>Infos Personnelles</h2>
+        <div class="info">Nom :</div>
+        <div class="info_data"><%=myUser.name%> <br /></div>
+        <div class="info">Email :</div>
+        <div class="info_data"><%=myUser.email%> <br /></div>
+        <div class="info">Role :</div>
+        <div class="info_data"><%=myUser.role%> <br /></div>
+      </div>
+      <div class="rank_tree">
+        <h2>Top 3 des arbres:</h2>
+        <div class="tree">
+          <% for (const [key, value] of Object.entries(rankTrees)) { %> <%= key%> : <%= value%> <br />
+          <% } %>
+        </div>
+      </div>
     </div>
     <div class="numberOfPoints">
-      <% if(myPosition.length==0){ %>
+      <% if(myPosition.length == 0){ %>
       <h2>Vous n'avez pas encore soumis de points.</h2>
       <% }else{ %>
       <h2>Vous avez soumis <%= myPosition.length %> points</h2>
-      <h2>
-        Il y a actuellement <%=myPosition.length+ otherPosition.length %>
-        positions d'arbres indiquées
-      </h2>
+      <h2>Il y a actuellement <%=myPosition.length+ otherPosition.length %> positions d'arbres.</h2>
       <% } %>
     </div>
     <div class="otherPoints">
-      <% if(otherPosition!=undefined&&myUser.role==="admin"){%> <%
-      if(otherPosition.length!=0){%>
+      <% if(otherPosition!=undefined&&myUser.role==="admin"){%> <% if(otherPosition.length!=0){%>
       <h2>Les autres points GPS</h2>
       <%let i=1; otherPosition.forEach(function(position) { %>
       <h3>Point <%= i %></h3>
@@ -45,38 +48,30 @@
         <b>Latitude</b>: <%= position.latitude %>,<br />
         <b>Longitude</b>: <%= position.longitude %> <br />
         <b>Type</b>: <%= position.type %> <br />
-        <b>Date</b>:<%= position.createdAt %>
+        <b>Date</b>: <%= position.createdAt.toLocaleDateString("fr", {year: 'numeric', month: 'long', day: 'numeric',
+        hour:'numeric', minute:'numeric'}) %>
         <div class="callout">
-          <button
-            class="close-button"
-            aria-label="Case de fermeture"
-            type="button"
-          >
-            &times;
-          </button>
+          <button class="close-button" aria-label="Case de fermeture" type="button">&times;</button>
         </div>
       </div>
       <%i++ })}};%>
-      <br />
     </div>
     <div class="mypoints">
       <% if(myPosition.length!=0){ %>
       <h2>Tes points GPS</h2>
       <%let i=1; myPosition.forEach(function(position) { %>
+      <div class="parent_hr">
+        <hr class="horizontal_line" />
+      </div>
       <h3>Point <%= i %></h3>
       <div class="latitude_longitude" id="<%= position._id %>">
-        <b>Latitude</b>: <%= position.latitude %>,<br />
+        <b>Latitude</b>: <%= position.latitude %><br />
         <b>Longitude</b>: <%= position.longitude %> <br />
         <b>Type</b>: <%= position.type %> <br />
-        <b>Date</b>:<%= position.createdAt %>
+        <b>Date</b>: <%= position.createdAt.toLocaleDateString("fr", {year: 'numeric', month: 'long', day: 'numeric',
+        hour:'numeric', minute:'numeric'}) %>
         <div class="callout">
-          <button
-            class="close-button"
-            aria-label="Case de fermeture"
-            type="button"
-          >
-            &times;
-          </button>
+          <button class="close-button" aria-label="Case de fermeture" type="button">&times;</button>
         </div>
       </div>
       <%i++ })};%>

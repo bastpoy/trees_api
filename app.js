@@ -2,7 +2,8 @@ const express = require("express");
 const authController = require("./controller/authController.js");
 const positionController = require("./controller/positionController.js");
 const viewsController = require("./controller/viewsController.js");
-const email = require("./utils/email.js");
+const email = require("./controller/emailController.js");
+const payment = require("./controller/paymentController.js");
 const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -61,12 +62,11 @@ app.use(hpp()); // tout ce qui concerne les filtres genre '?sort=price'
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
-  console.log(req.cookies);
   next();
 });
 app.use(function (req, res, next) {
   var ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-  console.log("IP address:", ip);
+  // console.log("IP address:", ip);
   next();
 });
 
@@ -75,7 +75,12 @@ app.get("/", viewsController.loginPage);
 app.post("/signup", authController.signup);
 app.post("/login", authController.login);
 app.get("/logout", authController.protect, authController.logout);
-app.get("/user", authController.protect, viewsController.userPage);
+app.get(
+  "/user",
+  authController.protect,
+  positionController.getTopThreePositions,
+  viewsController.userPage
+);
 app.get("/signupForm", viewsController.signupPage);
 
 //routes liées aux positions
@@ -89,6 +94,11 @@ app.get(
   "/mypositions",
   authController.protect,
   positionController.getMyPositions
+);
+app.get(
+  "/otherPositions",
+  authController.protect,
+  positionController.getOtherPositions
 );
 app.post(
   "/positions",
@@ -108,6 +118,8 @@ app.get(
   authController.protect,
   viewsController.contributionPage
 );
-app.get("/email",)
+app.get("/email:email", email.sendMail);
+app.get("/payment", payment.createPayment);
+app.get("/getTopThreePositions", positionController.getTopThreePositions);
 //j'exporte mon app
 module.exports = app;

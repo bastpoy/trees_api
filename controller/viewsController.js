@@ -13,6 +13,7 @@ exports.userPage = async (req, res, next) => {
   // il faut que je récupère l'id de mon utilisateur actuelle qui est connecté comme ca je peux avoir accès aux points
   //et je garde seulement les latitudes et longitudes
   try {
+    const rankTrees = await res.locals.topThreeObject;
     const myPosition = await Position.find({ user: req.user._id }).select(
       "-user -__v"
     );
@@ -28,6 +29,7 @@ exports.userPage = async (req, res, next) => {
       myPosition: myPosition,
       myUser: myUser,
       otherPosition: otherPosition,
+      rankTrees: rankTrees,
     });
   } catch (err) {
     console.log(err.message);

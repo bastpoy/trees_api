@@ -1,36 +1,46 @@
 {
   "name": "api_arbre",
   "version": "1.0.0",
-  "description": "je repère la position des arbes a Lyon",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "bastpoy",
-  "license": "ISC",
+  "description": "je donne la position des arbres de lyon",
+  "main": "server.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-mongo-sanitize": "^2.2.0",
-    "express-rate-limit": "^6.7.0",
-    "helmet": "^6.1.5",
+    "express-rate-limit": "^7.1.2",
+    "express.js": "^1.0.0",
+    "fs": "0.0.1-security",
+    "helmet": "^7.0.0",
     "hpp": "^0.2.3",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
     "mailtrap": "^3.2.0",
-    "mongoose": "^6.11.1",
-    "node": "^19.8.1",
+    "mongoose": "^6.12.2",
+    "node": "^21.1.0",
     "nodemailer": "^6.9.7",
-    "nodemon": "^2.0.22",
+    "nodemon": "^3.0.1",
     "path": "^0.12.7",
-    "validator": "^13.9.0",
+    "stripe": "^14.2.0",
+    "validator": "^13.11.0",
     "xss-clean": "^0.1.1"
   },
-  "engines": {
-    "node": "19.8.1"
-  }
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bastpoy/trees_api.git"
+  },
+  "author": "bastpoy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bastpoy/trees_api/issues"
+  },
+  "homepage": "https://github.com/bastpoy/trees_api#readme"
 }

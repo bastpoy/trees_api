@@ -1,10 +1,7 @@
-import { allPositions } from "./positions.js";
-
 //tout ce qui est lié à la mise en place de la map
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiYmFzdHBveSIsImEiOiJjbGJsYTI4OG0wNWtiM3ZwcTI2eXl6MHJ0In0.xTnNhxFnfExC0qKFXX7I3Q";
+mapboxgl.accessToken = "pk.eyJ1IjoiYmFzdHBveSIsImEiOiJjbGJsYTI4OG0wNWtiM3ZwcTI2eXl6MHJ0In0.xTnNhxFnfExC0qKFXX7I3Q";
 
-const map = new mapboxgl.Map({
+export const map = new mapboxgl.Map({
   container: "map", // container ID
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
   style: "mapbox://styles/mapbox/streets-v12", // style URL
@@ -22,57 +19,71 @@ map.addControl(
     showUserHeading: true,
   })
 );
-//j'affiche toutes les positions par defaut
-let numberOfLayer = 0;
-const returnPos = await allPositions();
-console.log(returnPos);
-tracePoint(returnPos);
-
-export async function tracePoint(datas) {
-  //cecei est utilisé pour la première connexion a ma map
-  await map.on("load", function () {});
-  // Add geolocate control to the map.
-  //je crée un array de tous mes points de ma base de données
-  const allPoints = datas.map((point) => ({
-    type: "Feature",
-    geometry: {
-      type: "Point",
-      coordinates: [point.longitude, point.latitude],
-    },
-  }));
-  //remove all the layer if it exists
-  if (map.getLayer(`${numberOfLayer - 1}`)) {
-    map.removeLayer(`${numberOfLayer - 1}`);
-  }
-  await map.addLayer({
-    // Add a layer to display the point
-    id: `${numberOfLayer}`,
-    type: "circle",
-    source: {
+export function traceAllPoints(myPoints, otherPoints) {
+  try {
+    const arrayMyPoints = myPoints.map((point) => ({
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [point.longitude, point.latitude],
+      },
+    }));
+    const arrayOtherPoints = otherPoints.map((point) => ({
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [point.longitude, point.latitude],
+      },
+    }));
+    if (map.getLayer("treeLayer")) {
+      map.removeLayer("treeLayer");
+      map.removeLayer("treeLayer1");
+    }
+    if (map.getSource("myPoints")) {
+      map.removeSource("myPoints");
+      map.removeSource("otherPoints");
+    }
+    map.addSource("myPoints", {
       type: "geojson",
       data: {
         type: "FeatureCollection",
-        features: allPoints,
+        features: arrayMyPoints,
       },
-    },
-    paint: {
-      "circle-color": "#228B22",
-      "circle-radius": 3,
-    },
-  });
-  //j'incrémente pour me permettre de créer des id de nouvelles layers
-  numberOfLayer++;
-  //cecei permet de raffraichir quand j'appuie sur mon cursor
-  await map.setStyle(map.getStyle());
+    });
+    map.addSource("otherPoints", {
+      type: "geojson",
+      data: {
+        type: "FeatureCollection",
+        features: arrayOtherPoints,
+      },
+    });
+    map.addLayer({
+      // Add a layer to display the point
+      id: "treeLayer",
+      type: "circle",
+      source: "myPoints",
+      paint: {
+        "circle-color": "#00b894",
+        "circle-radius": 3,
+      },
+      layout: {
+        visibility: "visible",
+      },
+    });
+    map.addLayer({
+      // Add a layer to display the point
+      id: "treeLayer1",
+      type: "circle",
+      source: "otherPoints",
+      paint: {
+        "circle-color": "#d63031",
+        "circle-radius": 3,
+      },
+      layout: {
+        visibility: "visible",
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
-
-map.on("load", () => {
-  map.addSource("treeType", {
-    type: "vector",
-  });
-  map.addLayer({
-    id: "tree_type",
-    type: "circle",
-    source: "treeType",
-  });
-});

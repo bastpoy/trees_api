@@ -8,9 +8,62 @@ body {
 }
 h2 {
   text-align: center;
+  text-transform: uppercase;
+  font-family: Inter;
+  letter-spacing: 0.55px;
+  padding-bottom: 15px;
+}
+h3 {
+  margin-bottom: 5px;
+}
+.parent_hr {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.horizontal_line {
+  background-color: #00b894;
+  width: 10%;
+  height: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-style: none;
+  border-radius: 5px;
+}
+.info_rank {
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .infos_personnelles {
-  text-align: center;
+  padding-left: 15px;
+}
+.info {
+  display: inline;
+  font-family: Inter;
+  font-size: 20px;
+  line-height: 1.25;
+  margin: 0 0 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+}
+.info_data {
+  display: inline;
+  font-family: Inter;
+  text-transform: uppercase;
+  letter-spacing: 0.55px;
+  font-size: 15px;
+}
+.rank_tree {
+  width: 50%;
+  padding-left: 20px;
+  border-left: solid #00b894;
+}
+.tree {
+  padding-left: 15px;
 }
 .numberOfPoints {
   padding-bottom: 20px;
@@ -30,9 +83,12 @@ h2 {
   justify-content: space-evenly;
   padding-top: 20px;
   padding-bottom: 20px;
+  background: linear-gradient(#00b894, rgba(184, 233, 148, 1));
+  margin-bottom: 15px;
 }
 .latitude_longitude {
   position: relative;
+  margin-bottom: 10px;
 }
 .close-button {
   color: #ea2027;

@@ -1,25 +1,25 @@
-import { allPositions } from "./featuresfunction/positions.js";
-import { myPositions } from "./featuresfunction/positions.js";
-import { addPosition } from "./featuresfunction/positions.js";
-import { tracePoint } from "./featuresfunction/mapbox.js";
+import { allPositions, myPositions, addPosition, otherPositions } from "./featuresfunction/positions.js";
+import { map, traceAllPoints } from "./featuresfunction/mapbox.js";
 
 const treeDiv = document.querySelector(".tree_type");
-const treeDivInput = document.querySelectorAll(
-  '.tree_type input[type="button"]'
-);
+const treeDivInput = document.querySelectorAll('.tree_type input[type="button"]');
 
-//je regarde si ma box est checked ou pas et je renvoie les positions de moi ou toutes
-document
-  .querySelector(".checkbox")
-  .addEventListener("change", async function () {
-    if (document.querySelector(".checkbox").checked) {
-      const returnPos = await myPositions();
-      tracePoint(returnPos);
-    } else {
-      const returnPos = await allPositions();
-      tracePoint(returnPos);
-    }
+//au chargement de la page j'affiche tous les points par défaut
+window.onload = async function () {
+  const myPoints = await myPositions();
+  const otherPoints = await otherPositions();
+  map.on("load", () => {
+    traceAllPoints(myPoints, otherPoints);
   });
+};
+//je regarde si ma box est checked ou pas et je renvoie les positions de moi ou toutes
+document.querySelector(".checkbox").addEventListener("change", async function () {
+  if (document.querySelector(".checkbox").checked) {
+    map.setLayoutProperty("treeLayer1", "visibility", "none");
+  } else {
+    map.setLayoutProperty("treeLayer1", "visibility", "visible");
+  }
+});
 
 //la gestion des boutons qui me renvoient sur les autres pages et qui ajoutent des positions d'arbres
 document.addEventListener("click", (ev) => {
