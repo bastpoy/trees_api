@@ -26,7 +26,8 @@
     "path": "^0.12.7",
     "stripe": "^14.2.0",
     "validator": "^13.11.0",
-    "xss-clean": "^0.1.1"
+    "xss-clean": "^0.1.1",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {},
   "scripts": {
